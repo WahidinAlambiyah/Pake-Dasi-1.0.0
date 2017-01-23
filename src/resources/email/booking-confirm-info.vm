@@ -1,0 +1,167 @@
+<table style="background:#fff;border:1px solid #d1d1d1;width:700px;border-spacing:0;font-size:12px;font-family:Tahoma;margin:auto auto;line-height:24px">
+  <tr style="background:#ddd;height:100px; border: 1px solid #ddd; border-bottom:1px solid #d1d1d1">
+    <td width="50%" style="border:0;padding-left:25px">
+    	<img src="http://128.199.167.199:5555/padiciti-hotel-v2/images/Logo_Padiciti_Reservation_Hotel.png" height="60px">
+    </td>
+    <td width="50%" style="border: 0px;font-size:14px;padding:-1px; text-align:right">
+		<img src="http://128.199.167.199:5555/padiciti-hotel-v2/images/unpaid.png">
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:25px" colspan="2">
+		<p>Padiciti User.<br/>
+		Mr/Mrs/Ms. ${trn.user.fullName}<br/>
+		</p>
+		Thank you for your trust using Padiciti, hotel reservation service. Hereby, We inform your hotel reservation with following details: 
+		<br/>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding-left:25px;min-width:50%" width="50%" valign="top">
+    	<div>Padiciti Transaction Code</div>
+		<div style="font-size:18px"><b>${noTransaksi}</b></div>
+		<div><div style="float:left;min-width:100px">Client</div>
+			 <div style="float:left"><b>${trn.user.fullName}</b></div>
+		</div>
+			<div style="clear:both"></div>
+
+		<div><div style="float:left;min-width:100px">Phone</div>
+			 <div style="float:left"><b>${trn.user.phoneNumber}</b></div>
+	  	</div>
+			<div style="clear:both"></div>
+
+		<div><div style="float:left;min-width:100px">Booking Date</div>
+			 <div style="float:left"><b>${bookingDate}</b></div>
+		</div>
+			<div style="clear:both"></div>
+		<div><div style="float:left;min-width:100px">Payment Limit</div>
+			 <div style="float:left"><b>${limitPaymentDate}</b></div>
+		</div>
+			<div style="clear:both"></div>
+    </td> 
+    <td valign="top" style="padding:0 10px;line-height:18px" >
+    	<b>HOTEL DETAILS</b><br/>
+		<table style="font-size:12px;">
+		<tr>
+			<td colspan="2">
+			#if (${hotelName} != "-") 
+				${hotelName}<br/>
+			#end
+
+			#if (${htlAddress} != "-") 
+				${htlAddress}<br/>
+			#end
+
+			#if (${htlPostalCode} != "-") 
+				${htlPostalCode}<br/>
+			#end
+			<br/>
+			</td>
+		</tr>
+		#if (${htlPhone} != "-") 
+			<tr>
+				<td width="75px" >Phone </td>
+				<td>: ${htlPhone}</td>
+			</tr>
+		#end
+
+		#if (${htlFax} != "-") 
+			<tr>
+				<td width="75px" >Fax</td>
+				<td>: ${htlFax}</td>
+			</tr>
+		#end
+
+		#if (${htlEmail} != "-") 
+			<tr>
+				<td width="75px" >Email</td>
+				<td>: ${htlEmail}</td>
+			</tr>
+		#end
+
+		#if (${htlWeb} != "-") 
+			<tr>
+				<td width="75px" >Web</td>
+				<td>: ${htlWeb}</td>
+			</tr>
+		#end
+		</table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" style="padding:30px 0 " colspan="2">
+			<table width="100%" style="font-size:12px;text-align:left;border-collapse:collapse;border-spacing:0">
+			  <tr style="background:#e3e3e3;height:35px;border-top:1px solid #d1d1d1;border-bottom:1px solid #d1d1d1">
+			    <th width="30%" style="padding-left:23px">ROOM TYPE</th>
+			    <th width="5%" style="text-align:center">ROOM COUNT</th>
+			    <th width="25%" style="text-align:center">HANDLER NAME</th>
+			    <th width="15%" style="text-align:center">CHILD AGE</th>
+			    <th width="15%" style="text-align:center">ADULT </th>
+			    <th width="15%" style="padding-right:23px;text-align:center">CHILD</th>
+			  </tr>
+			  #foreach( $a in $dataTableDetailsLst)
+				<tr style="background:#f2f2f2;vertical-align:middle;">
+				    <td style="padding: 10px 0 10px 23px;">$!a.roomName <br/><small>$!a.boardName</small></td>
+				    <td style="padding: 10px 0 10px 0px;text-align:center">$!a.roomCount </td>
+				    <td style="padding: 10px 0 10px 0px;text-align:center">$!a.adultNameLst </td>
+				    <td style="padding: 10px 0 10px 0px;text-align:center">$!a.childAgeLst </td>
+				    <td style="padding: 10px 0 10px 0px;text-align:center">$!a.paxAdult </td>
+				    <td style="padding: 10px 23px 10px 0px;text-align:center;">$!a.paxChild</td>
+			  </tr>
+			  #end
+			</table>
+	</td>
+   </tr>
+   
+  <tr>
+    <td valign="top" style="padding:20px 0 " colspan="2">
+    
+			<table width="100%" style="font-size:12px;border-collapse:collapse;border-spacing:0">
+			  <tr style="background:#e3e3e3;height:35px;border-top:1px solid #d1d1d1;border-bottom:1px solid #d1d1d1">
+			    <th width="15%" style="padding-left:23px">TOTAL ROOM</th>
+			    <th width="30%">OCCUPANCY</th>
+			    <th width="15%">CHECK IN</th>
+			    <th width="15%" style="padding-right:23px">CHECK OUT</th>
+			  </tr>
+			  <tr style="background:#f2f2f2;vertical-align:middle;text-align:center; padding: 0 5px">
+			    <td style="padding: 10px 0 10px 23px;text-align:center">${roomCount}</td>
+			    <td style="padding: 10px 0 10px 0px;text-align:center">${adultCount} Adult(s)#if ( $childCount > 0 ) and ${childCount} Child(s) #end</td>
+			    <td style="padding: 10px 0 10px 0px;text-align:center">${dateFrom}</td>
+			    <td style="padding: 10px 23px 10px 0px;text-align:center">${dateTo}</td>
+			  </tr>
+			</table>
+
+	</td>
+   </tr>
+   <tr><td colspan="2">
+	   	<span style="width:300px;float:right; padding-right:23px; text-align:right; padding-bottom:50px">
+	   		<table width="100%" style="font-size:12px;border-collapse:collapse;border-spacing:0;">
+			  <tr style="vertical-align:bottom;text-align:center; line-height: 18px">
+			    <td width="40%" style="text-align:right; font-size: 14px">Total Price</td>
+			    <td width="60%" style="text-align:right; font-size: 14px"><b>${totalHargaTiket}</b> IDR</td>
+			  </tr>
+			  <tr style="vertical-align:top;text-align:right;">
+			    <td colspan="2"><br/><span style="color:red; font-weight:bold">*</span><i>This Price Include Tax and Service Charges</i></td>
+			  </tr>
+			</table>
+		</span>
+		</td>
+   </tr>
+   <tr>
+
+   		<td colspan="2">
+
+   		<div style="background:#f2f2f2;vertical-align:center; border-top: 1px solid #e3e3e3">
+			<p style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#222;padding: 10px 0 20px 0; text-align: center">
+          		<img alt="Telp" src="http://128.199.167.199:5555/padiciti-hotel-v2/images/phone.png" width="20" height="20" class="CToWUd">
+          		+62 21 2963 3600 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          		<img alt="Telp" src="http://128.199.167.199:5555/padiciti-hotel-v2/images/mail_icon.gif" width="20" height="20" class="CToWUd"> <a href="mailto:cs@padiciti.com" value="+622129633600" target="_blank" style="color:#222">cs@padiciti.com</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          		<img alt="Telp" src="http://128.199.167.199:5555/padiciti-hotel-v2/images/icontwitter.png" width="20" height="20" class="CToWUd"> <a href="http://twitter.com/padiciti" target="_blank" style="color:#222">@Padiciti</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          		<img alt="Telp" src="http://128.199.167.199:5555/padiciti-hotel-v2/images/iconfacebook.png" width="20" height="20" class="CToWUd"> <a href="http://www.facebook.com/padiciti" value="+622129633600" target="_blank" style="color:#222">Padiciti</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          		<img alt="Telp" src="http://128.199.167.199:5555/padiciti-hotel-v2/images/iconinstagram.png" width="20" height="20" class="CToWUd"> <a href="http://instagram.com/padiciti" value="+622129633600" target="_blank" style="color:#222; te">@Padiciti</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          	</p>
+   		</div>
+   		</td> 
+   </tr>
+ </table>

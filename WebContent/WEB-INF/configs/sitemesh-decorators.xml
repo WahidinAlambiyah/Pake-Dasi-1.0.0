@@ -1,0 +1,38 @@
+
+
+
+<decorators defaultdir="/sys">
+ 
+  
+
+    <!-- ================================================================== -->
+    <!-- DECORATORS (NOTE: order precedence is important!)                  -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- Search Decorator, CURRENTLY NOT USED -->
+    <decorator name="view_search" page="search.jsp"/>
+    
+    <!-- Print Decorator, CURRENTLY NOT USED -->
+    <decorator name="view_print"  page="print.jsp"/>
+
+	<!-- Dialog URL. Any URL match with 'dialog' keyword -->
+    <decorator name="dialog" page="dialog.jsp">
+        <pattern>/dialog/*</pattern>
+        <pattern>/**/dialog*</pattern>
+    </decorator>
+
+	<!-- Default URL. Handled all unhandled previous URL pattern  -->
+    <decorator name="main" page="default.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+
+   <!-- ================================================================== -->
+    <!-- EXCLUDES                                                           -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <excludes>
+        <pattern>/index*</pattern>
+         <pattern>/login*</pattern>
+          <!-- <pattern>/service*</pattern> -->
+          <pattern>/FinPay195*</pattern>
+    </excludes>
+    
+</decorators>

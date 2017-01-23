@@ -1,0 +1,47 @@
+<table style="background:#fff;border:1px solid #d1d1d1;width:700px;border-spacing:0;font-size:12px;font-family:Tahoma;margin:auto auto;line-height:24px">
+  <tr style="background:#ddd;height:100px; border: 1px solid #ddd; border-bottom:1px solid #d1d1d1">
+    <td style="border:0;padding-left:25px">
+    	<img src="http://128.199.167.199:5555/padiciti-hotel-v2/images/Logo_Padiciti_Reservation_Hotel.png" height="60px">
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:25px" colspan="2">
+		Dear All Support, 
+		<br/>
+		<p>User dengan nama : <b>${user}</b> , telah mengalami gagal update booking <b><font color="blue">hotel</font></b> setelah melakukan pembayaran 
+		</p>
+		<table style="font-size:12px; line-height:20px; border:1px solid #999; padding: 0 10px 10px 10px; min-width: 400px">
+			<tr>
+				<td width="75px" colspan="2" style="border-bottom:1px dashed #999; line-height: 30px" ><b>RESERVATION DETAILS</b>
+			</tr>
+			<tr>
+				<td width="125px" >Transaction Code </td>
+				<td>:&nbsp; ${noTransaksi}</td>
+			</tr>
+			<tr>
+				<td>Payment Via</td>
+				<td>:&nbsp; ${paymentType}</td>
+			</tr>
+			<tr>
+				<td>Payment Code</td>
+				<td>:&nbsp; ${paymentCode}</td>
+			</tr>
+			<tr>
+				<td>Booking Date</td>
+				<td>:&nbsp; ${bookingDate}</td>
+			</tr>
+			<tr>
+				<td>Payment Date</td>
+				<td>:&nbsp; ${paymentDate}</td>
+			</tr>
+
+		</table>
+		</center>
+		<br/>
+		Terima Kasih, 
+		<br/><br/>
+		Padiciti Service
+    </td>
+  </tr>
+
+ </table>

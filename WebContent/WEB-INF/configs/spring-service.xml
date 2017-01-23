@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	  xmlns:tx="http://www.springframework.org/schema/tx"
+	 xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/tx   http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+<task:annotation-driven />
+<tx:annotation-driven/>
+
+ <tx:advice id="txAdvice" transaction-manager="transactionManager">
+  <tx:attributes>
+  <tx:method name="save*" propagation="REQUIRED"/>
+  <tx:method name="delete*" propagation="REQUIRED"/>
+  <tx:method name="update*" propagation="REQUIRED"/>
+  <tx:method name="*" read-only="true"/>
+    <tx:method name="execute" propagation="REQUIRED" /> 	
+  </tx:attributes>
+  </tx:advice>
+  
+  <aop:config>
+  <aop:pointcut id="allManagerMethod" expression="execution (* com.padiciti.service.*.*(..))"/>
+  <aop:advisor advice-ref="txAdvice" pointcut-ref="allManagerMethod"/>
+  </aop:config> 	
+  
+	<!--  <aop:config>
+  <aop:pointcut id="allManagerMethodBimasakti" expression="execution (* com.padiciti.service.*.*(..))"/>
+  <aop:advisor advice-ref="txAdviceBimasakti" pointcut-ref="allManagerMethodBimasakti"/>
+  </aop:config> 	 -->	
+	
+	<!-- NEW JOB RUN SCHEDULLER -->
+		 <!-- Beans Declaration -->
+	    <!-- <bean id="DoExpiredTransactionTask" class="com.padiciti.service.job.task.DoExpiredTransactionTask"></bean>
+	    <bean id="DoAdviceJatelindoBpjsTransaction" class="com.padiciti.service.job.task.DoAdviceJatelindoBpjsTransaction"></bean>
+	    <bean id="DoJatelindoPlnTransaction" class="com.padiciti.service.job.task.DoJatelindoPlnTransaction"></bean>
+	    <bean id="DoBimasaktiPulsaTransaction" class="com.padiciti.service.job.task.DoBimasaktiPulsaTransaction"></bean> -->
+	    
+	    
+	    <!-- <bean id="SchedulerService" class="com.padiciti.service.impl.job.run.SchedulerServiceImpl">
+	        <property name="doExpiredTransactionTask" ref="DoExpiredTransactionTask" />
+	        <property name="doAdviceJatelindoBpjsTransaction" ref="DoAdviceJatelindoBpjsTransaction" />
+	        <property name="doJatelindoPlnTransaction" ref="DoJatelindoPlnTransaction" />
+	        <property name="doBimasaktiPulsaTransaction" ref="DoBimasaktiPulsaTransaction" />
+	    </bean> -->
+	    
+		<!-- SchedulerFactoryBean -->
+		<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		    <property name="jobDetails">
+		       <list>
+		       
+		    		<!-- UN-COMMENT TO ACTIVATE SCHEDULER -->
+					<!-- <ref bean="DoExpiredTransactionJobDetail" />  -->
+					<!-- <ref bean="DoAdviceJatelindoBpjsTransactionJobDetail" /> -->
+					<!-- <ref bean="DoJatelindoPlnTransactionJobDetail" /> -->
+					<!-- <ref bean="DoBimasaktiPulsaTransactionJobDetail" /> -->
+		       
+		       </list>
+		    </property>
+	
+		    <property name="triggers">
+		       <list>
+		       
+		    		<!-- UN-COMMENT TO ACTIVATE SCHEDULER -->
+					<!--  <ref bean="DoExpiredTransactionTrigger" />   -->
+					<!-- <ref bean="DoAdviceJatelindoBpjsTransactionTrigger" /> -->
+					<!-- <ref bean="DoJatelindoPlnTransactionTrigger" /> -->
+					<!-- <ref bean="DoBimasaktiPulsaTransactionTrigger" /> -->
+		       
+		       </list>
+		    </property>
+		</bean>
+	
+		<!-- Cron Trigger -->
+		<!-- <bean id="DoExpiredTransactionTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		    <property name="jobDetail" ref="DoExpiredTransactionJobDetail" />
+		    <property name="cronExpression" value="0 0/2 * * * ?" />
+		</bean>
+	
+		Job Details
+		<bean id="DoExpiredTransactionJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="SchedulerService" />
+		    <property name="targetMethod" value="executeExpiredTransactionTask" />
+		</bean>
+		
+		Cron Trigger BPJS
+		<bean id="DoAdviceJatelindoBpjsTransactionTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		    <property name="jobDetail" ref="DoAdviceJatelindoBpjsTransactionJobDetail" />
+		    <property name="cronExpression" value="0/30 * * * * ?" />
+		</bean>
+	
+		Job Details BPJS
+		<bean id="DoAdviceJatelindoBpjsTransactionJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="SchedulerService" />
+		    <property name="targetMethod" value="executeAdviceJatelindoBpjsTransaction" />
+		</bean>
+		
+		Cron Trigger PLN
+		<bean id="DoJatelindoPlnTransactionTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		    <property name="jobDetail" ref="DoJatelindoPlnTransactionJobDetail" />
+		    <property name="cronExpression" value="0/21 * * * * ?" />
+		</bean>
+	
+		Job Details PLN
+		<bean id="DoJatelindoPlnTransactionJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="SchedulerService" />
+		    <property name="targetMethod" value="executeJatelindoPlnTransaction" />
+		</bean>
+		
+		Cron Trigger PULSA
+		<bean id="DoBimasaktiPulsaTransactionTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		    <property name="jobDetail" ref="DoBimasaktiPulsaTransactionJobDetail" />
+		    <property name="cronExpression" value="0/30 * * * * ?" />
+		</bean>
+	
+		Job Details PULSA
+		<bean id="DoBimasaktiPulsaTransactionJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		    <property name="targetObject" ref="SchedulerService" />
+		    <property name="targetMethod" value="executeBimasaktiPulsaTransaction" />
+		</bean> -->
+	
+
+</beans>
