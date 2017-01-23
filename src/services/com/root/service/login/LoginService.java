@@ -13,4 +13,5 @@ import java.util.HashMap;
 public interface LoginService {
 	public String userRegistration(HashMap<String, Object> obj);
 	public String userLogin(HashMap<String, Object> obj);
+	public String officerLogin(HashMap<String, Object> obj);
 }

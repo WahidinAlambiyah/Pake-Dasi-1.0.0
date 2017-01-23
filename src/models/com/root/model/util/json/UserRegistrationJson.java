@@ -20,7 +20,6 @@ public class UserRegistrationJson extends BaseResponseJson implements Serializab
 	protected String email;
 	protected String phoneNumber;
 	protected String activeUser;
-		
 	
 	protected String orderStatus;
 	protected String flightNumber;
